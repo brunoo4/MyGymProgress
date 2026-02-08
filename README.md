@@ -1,35 +1,98 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+# MyGym Progress 🏋️‍♂️
 
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-    folder is the appropriate location.
+Kotlin Compose Multiplatform Platform
 
-* [/iosApp](./iosApp/iosApp) contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+**MyGym Progress** is a workout tracker built entirely with **Kotlin Multiplatform (KMP)**.
 
-### Build and Run Android Application
-
-To build and run the development version of the Android app, use the run configuration from the run widget
-in your IDE’s toolbar or build it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:assembleDebug
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:assembleDebug
-  ```
-
-### Build and Run iOS Application
-
-To build and run the development version of the iOS app, use the run configuration from the run widget
-in your IDE’s toolbar or open the [/iosApp](./iosApp) directory in Xcode and run it from there.
+The primary goal of this project is to explore the capabilities of KMP for sharing business logic, data persistence, and UI (via Compose Multiplatform) between Android and iOS, following a **"Local-First"** approach that will eventually evolve into a Cloud Sync architecture.
 
 ---
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+## 📸 Screenshots
+
+_(Place your screenshots here later. Suggested: Home Screen | Active Session | Dark Mode Details)_
+
+---
+
+## 🛠 Tech Stack & Libraries
+
+This project uses a modern, scalable stack designed for speed and stability:
+
+* **Core:** Kotlin Multiplatform
+* **UI:** Compose Multiplatform (Material 3)
+* **Navigation:** Voyager (Cross-platform navigation)
+* **Dependency Injection:** Koin
+* **Database:** Room KMP (SQLite abstraction)
+* **Concurrency:** Kotlin Coroutines & Flow
+* **Architecture:** Clean Architecture + MVI/MVVM
+
+---
+
+## 🏗 Architecture
+
+The project follows **Clean Architecture** principles to ensure separation of concerns and testability.
+
+### Module Structure
+
+* **:composeApp** \- Contains the UI (Compose) and platform-specific entry points (Android Activity / iOS ViewController).
+* **:shared** \- The brain of the app. Contains:  
+   * **Domain:** Entities, Use Cases, Repository Interfaces (Pure Kotlin).  
+   * **Data:** API implementation, Room Database, Repository Implementations.  
+   * **Presentation:** ViewModels/ScreenModels (State management).
+
+### Design Pattern
+
+The app uses a Unidirectional Data Flow (**UDF**) approach:
+
+1. **UI** emits events (Intents).
+2. **ViewModel** processes logic/use cases.
+3. **State** is updated and observed by the UI.
+
+---
+
+## 🚀 Features & Roadmap
+
+This project is being developed in two main phases to simulate a real-world product evolution.
+
+### Phase 1: Local-First (Current Status)
+
+* **Workout Session:** Real-time tracker with stopwatch.
+* **Exercise Management:** Custom database of exercises (Muscle groups, names).
+* **History:** Local persistence using Room KMP.
+* **Theming:** "Cyberpunk Clean" Dark Mode UI.
+
+### Phase 2: Cloud & Sync (Planned)
+
+* **Backend:** Ktor Server implementation.
+* **Auth:** JWT Authentication.
+* **Sync Engine:** Background synchronization of local data to the cloud.
+* **Public Leaderboards:** Global stats API.
+
+---
+
+## 🔧 Getting Started
+
+### Prerequisites
+
+* JDK 17+
+* Android Studio (latest Hedgehog or Iguana recommended)
+* Xcode (for iOS build)
+* KDoctor (optional, to verify environment)
+
+### Running on Android
+
+Open the project in Android Studio and run the `composeApp` configuration.
+
+### Running on iOS
+
+1. Open `iosApp/iosApp.xcworkspace` in Xcode.
+2. Select a simulator and run.  
+   * _Note: Ensure you have the Kotlin Multiplatform Mobile plugin installed._
+
+---
+
+## 👨‍💻 Author
+
+**Bruno**Senior Android Developer | Software Engineer
+
+Built with ❤️ and Kotlin.
